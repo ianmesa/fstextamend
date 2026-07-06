@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mesa Zoning Text Amendment — Fleet-Based Services &amp; Service Stations</title>
+  <meta name="description" content="Interactive map of the City of Mesa's proposed Fleet-Based Services & Service Stations zoning text amendment: current code vs. proposed districts, CUP requirements, and council districts." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%2314476f'/%3E%3Ctext x='50' y='63' font-size='42' font-family='sans-serif' font-weight='bold' fill='white' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="vendor/leaflet/leaflet.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div id="app">
+    <header>
+      <div class="seal" aria-hidden="true">MESA</div>
+      <div class="titles">
+        <h1>Fleet-Based Services &amp; Service Stations — Zoning Text Amendment</h1>
+        <p class="subtitle">City of Mesa · Title 11 (Chapters 6, 7, 8, 31 &amp; 86) · Planning &amp; Zoning Board, June 24, 2026</p>
+      </div>
+      <div class="spacer"></div>
+      <button class="btn-about" id="about-open">About this map</button>
+    </header>
+
+    <div id="controls">
+      <nav id="use-tabs" role="tablist" aria-label="Use classification"></nav>
+      <div id="view-toggle" role="group" aria-label="Code version">
+        <button class="vt" data-view="current" aria-pressed="false">Today’s Code</button>
+        <button class="vt" data-view="proposed" aria-pressed="false">Proposed</button>
+        <button class="vt" data-view="changes" aria-pressed="false">What Changes</button>
+      </div>
+      <label class="council-row" id="council-row">
+        <input type="checkbox" id="council-toggle" checked />
+        Council districts
+      </label>
+    </div>
+
+    <div id="map-wrap">
+      <div id="map"></div>
+      <div id="legend" aria-live="polite"></div>
+      <div id="demo-banner" hidden>DEMO DATA — synthetic parcels for preview only</div>
+    </div>
+
+    <aside id="panel" aria-label="Amendment details">
+      <div id="panel-top">
+        <h1>Amendment details</h1>
+        <button id="panel-collapse" title="Collapse panel" aria-label="Collapse panel">⇥</button>
+      </div>
+      <div id="panel-body"></div>
+    </aside>
+  </div>
+
+  <div id="loading">
+    <div class="load-card">
+      <h2>Loading Mesa zoning data…</h2>
+      <p id="loading-msg">Contacting Mesa GIS…</p>
+      <div class="loading-bar"><div id="loading-bar-fill"></div></div>
+      <p style="font-size:0.8rem">Zoning districts load live from City of Mesa GIS services.</p>
+    </div>
+  </div>
+
+  <dialog id="about">
+    <h2>About this map</h2>
+    <p>
+      This interactive map visualizes the City of Mesa’s proposed
+      <strong>Fleet-Based Services &amp; Service Stations zoning text amendment</strong>
+      (amending Mesa City Code Title&nbsp;11, Chapters 6, 7, 8, 31 and 86). Pick a use
+      classification, then flip between <em>Today’s Code</em>, the <em>Proposed</em>
+      amendment, and <em>What Changes</em> to see exactly which zoning districts are affected.
+    </p>
+    <h3>How to read it</h3>
+    <p>
+      <strong style="color:#005c00">Green</strong> = permitted by right ·
+      <strong style="color:#7c3a06">Hatched amber</strong> = requires a Council Use Permit (CUP) ·
+      <strong style="color:#52514e">Gray</strong> = not permitted. In the
+      <em>What Changes</em> view, <strong style="color:#184f95">blue</strong> marks districts
+      where the use is already allowed today with no change. Click any area for its
+      district-by-district status; dashed black lines are City Council districts.
+    </p>
+    <h3>Sources</h3>
+    <ul>
+      <li>Ordinance text: Exhibit 1 (Fleet Services &amp; Service Station Ordinance) and Exhibit 2 (Section 11-31-40), as recommended in the June 24, 2026 Planning &amp; Zoning Board staff report.</li>
+      <li>Current code: <a href="https://library.municode.com/az/mesa/codes/code_of_ordinances?nodeId=COOR_TIT11ZOOR" target="_blank" rel="noopener">Mesa Zoning Ordinance (Title 11)</a>.</li>
+      <li>Zoning &amp; council district boundaries: <a href="https://opengis.mesaaz.gov/" target="_blank" rel="noopener">City of Mesa GIS</a>, loaded live at page open.</li>
+    </ul>
+    <p style="font-size:0.85rem;color:#52514e">
+      Unofficial visualization prepared for public engagement and board discussion.
+      It is not a legal document; where this map and the adopted ordinance text differ,
+      the ordinance governs. Overlay districts and site-specific conditions are not shown.
+    </p>
+    <button class="btn" id="about-close">Close</button>
+  </dialog>
+
+  <script src="vendor/leaflet/leaflet.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
