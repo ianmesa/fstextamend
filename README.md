@@ -37,14 +37,20 @@ No build step — plain HTML/CSS/JS with a vendored copy of
 
 ## Hosting on GitHub Pages
 
-A deploy workflow is included at
-[`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml).
-One-time setup:
+This is a plain static site (no build step), so it publishes directly from a
+branch. One-time setup:
 
-1. In the repository, go to **Settings → Pages** and set **Source** to
-   **GitHub Actions**.
-2. Merge (or push) to `main`. The workflow publishes the site to
-   `https://<owner>.github.io/fstextamend/`.
+1. In the repository, go to **Settings → Pages**.
+2. Under **Source**, choose **Deploy from a branch**.
+3. Set **Branch** to `main` and the folder to **`/ (root)`**, then **Save**.
+
+GitHub serves the site at `https://<owner>.github.io/fstextamend/`
+(here, https://ianmesa.github.io/fstextamend/). Every push to `main`
+republishes automatically — usually live within a minute. The included
+`.nojekyll` file tells Pages to serve all directories as-is.
+
+All asset paths in `index.html` are relative, so the site works correctly
+under the `/fstextamend/` sub-path.
 
 ## Local preview
 
